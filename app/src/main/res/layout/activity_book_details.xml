@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BookDetailActivity"
+    tools:context=".ui.BookDetailActivity"
     android:background="@color/colorPrimary">
 
     <android.support.constraint.ConstraintLayout
@@ -12,7 +12,7 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/detail_book_cover"
+            android:id="@+id/detailBookCoverImageView"
             android:layout_width="wrap_content"
             android:layout_height="245dp"
             android:scaleType="centerCrop"
@@ -23,42 +23,42 @@
 
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/backgroundImageView"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:src="@drawable/gradient_bg"
-            app:layout_constraintBottom_toBottomOf="@+id/detail_book_cover"
-            app:layout_constraintEnd_toEndOf="@+id/detail_book_cover"
+            app:layout_constraintBottom_toBottomOf="@+id/detailBookCoverImageView"
+            app:layout_constraintEnd_toEndOf="@+id/detailBookCoverImageView"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/detail_book_cover" />
+            app:layout_constraintTop_toTopOf="@+id/detailBookCoverImageView" />
 
         <android.support.design.widget.FloatingActionButton
-            android:id="@+id/play_fab"
+            android:id="@+id/playFloatingActionButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="true"
             android:src="@drawable/ic_play_arrow_black_24dp"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView"
-            app:layout_constraintEnd_toEndOf="@+id/imageView"
-            app:layout_constraintStart_toStartOf="@+id/imageView"
-            app:layout_constraintTop_toTopOf="@+id/imageView" />
+            app:layout_constraintBottom_toBottomOf="@+id/backgroundImageView"
+            app:layout_constraintEnd_toEndOf="@+id/backgroundImageView"
+            app:layout_constraintStart_toStartOf="@+id/backgroundImageView"
+            app:layout_constraintTop_toTopOf="@+id/backgroundImageView" />
 
         <ImageView
             android:transitionName="sharedName"
-            android:id="@+id/detail_book_img"
+            android:id="@+id/detailBookImageView"
             android:layout_width="125dp"
             android:layout_height="175dp"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
             android:scaleType="centerCrop"
-            app:layout_constraintBottom_toBottomOf="@+id/detail_book_cover"
+            app:layout_constraintBottom_toBottomOf="@+id/detailBookCoverImageView"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/detail_book_cover"
+            app:layout_constraintTop_toBottomOf="@+id/detailBookCoverImageView"
             android:src="@drawable/me" />
 
 
         <TextView
-            android:id="@+id/detail_book_title"
+            android:id="@+id/detailBookTitleTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -69,13 +69,13 @@
             android:text="TextView"
             android:textColor="@android:color/white"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/detail_book_img"
-            app:layout_constraintTop_toBottomOf="@+id/detail_book_cover" />
+            app:layout_constraintStart_toEndOf="@+id/detailBookImageView"
+            app:layout_constraintTop_toBottomOf="@+id/detailBookCoverImageView" />
 
         <TextView
             android:lineSpacingExtra="8dp"
             android:textColor="@color/text_light_blue"
-            android:id="@+id/detail_book_desc"
+            android:id="@+id/detailBookDescriptionTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -86,7 +86,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:text="@string/simple_text"
-            app:layout_constraintTop_toBottomOf="@+id/detail_book_img" />
+            app:layout_constraintTop_toBottomOf="@+id/detailBookImageView" />
 
 
 

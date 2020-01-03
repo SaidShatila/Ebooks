@@ -1,4 +1,4 @@
-package com.example.user.ebooks;
+package com.example.user.ebooks.functionalities;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -9,8 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.user.ebooks.Book;
-import com.example.user.ebooks.BookItemClickListener;
+import com.example.user.ebooks.base.Book;
 import com.example.user.ebooks.R;
 
 import java.util.List;
@@ -66,8 +65,8 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.MyViewHolder> 
         public MyViewHolder(@NonNull View itemView) {
 
             super(itemView);
-            BookTitle= itemView.findViewById(R.id.item_book_title);
-            ImgBook = itemView.findViewById(R.id.item_book_img);
+            BookTitle= itemView.findViewById(R.id.itemBookTitleTextView);
+            ImgBook = itemView.findViewById(R.id.itemBookImageView);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

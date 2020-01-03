@@ -1,10 +1,8 @@
-package com.example.user.ebooks;
+package com.example.user.ebooks.ui;
 
-import android.app.ActivityOptions;
 import android.content.Intent;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,6 +10,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.example.user.ebooks.base.Book;
+import com.example.user.ebooks.functionalities.BookAdapter;
+import com.example.user.ebooks.functionalities.BookItemClickListener;
+import com.example.user.ebooks.R;
+import com.example.user.ebooks.functionalities.Slide;
+import com.example.user.ebooks.functionalities.SliderPagerAdapter;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -19,36 +25,36 @@ import java.util.TimerTask;
 
 public class HomeActivity extends AppCompatActivity implements BookItemClickListener {
 
-    private List<Slide> firstSlides ;
-    private ViewPager sliderpager;
-    private TabLayout indicator;
-    private RecyclerView MoviesRV ;
+    private List<Slide> firstSlidesList;
+    private ViewPager sliderPagerViewPager;
+    private TabLayout indicatorTabLayout;
+    private RecyclerView moviesRecylerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        sliderpager = findViewById(R.id.slider_pager) ;
-        indicator = findViewById(R.id.indicator);
-        MoviesRV = findViewById(R.id.Rv_books);
+        sliderPagerViewPager = findViewById(R.id.slider_pagerViewPager) ;
+        indicatorTabLayout = findViewById(R.id.indicatorTabLayout);
+        moviesRecylerView = findViewById(R.id.booksRecylerView);
 
         // prepare a list of slides ..
-        firstSlides = new ArrayList<>() ;
-        firstSlides.add(new Slide(R.drawable.agenls,"Angels & Demons"));
-        firstSlides.add(new Slide(R.drawable.children,"Children Of Darkness"));
-        firstSlides.add(new Slide(R.drawable.hell,"Hell Divers VI Allegiance"));
-        firstSlides.add(new Slide(R.drawable.night,"Sharing NightMares"));
-        firstSlides.add(new Slide(R.drawable.me,"Someone Like ME"));
-        firstSlides.add(new Slide(R.drawable.science,"Putting The Science In Fiction"));
-        SliderPagerAdapter adapter = new SliderPagerAdapter(this,firstSlides);
-        sliderpager.setAdapter(adapter);
+        firstSlidesList = new ArrayList<>() ;
+        firstSlidesList.add(new Slide(R.drawable.agenls,"Angels & Demons"));
+        firstSlidesList.add(new Slide(R.drawable.children,"Children Of Darkness"));
+        firstSlidesList.add(new Slide(R.drawable.hell,"Hell Divers VI Allegiance"));
+        firstSlidesList.add(new Slide(R.drawable.night,"Sharing NightMares"));
+        firstSlidesList.add(new Slide(R.drawable.me,"Someone Like ME"));
+        firstSlidesList.add(new Slide(R.drawable.science,"Putting The Science In Fiction"));
+        SliderPagerAdapter adapter = new SliderPagerAdapter(this, firstSlidesList);
+        sliderPagerViewPager.setAdapter(adapter);
 
-        sliderpager.setAdapter(adapter);
+        sliderPagerViewPager.setAdapter(adapter);
         // setup timer
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new HomeActivity.SliderTimer(),4000,6000);
-        indicator.setupWithViewPager(sliderpager,true);
+        indicatorTabLayout.setupWithViewPager(sliderPagerViewPager,true);
 
         // Recyclerview Setup
         // ini data
@@ -63,8 +69,8 @@ public class HomeActivity extends AppCompatActivity implements BookItemClickList
 
 
         BookAdapter movieAdapter = new BookAdapter(this,lstBooks,this);
-        MoviesRV.setAdapter(movieAdapter);
-        MoviesRV.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
+        moviesRecylerView.setAdapter(movieAdapter);
+        moviesRecylerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
 
 
 
@@ -76,13 +82,13 @@ public class HomeActivity extends AppCompatActivity implements BookItemClickList
     public void onBookClick(Book book, ImageView movieImageView) {
 
 
-        Intent intent = new Intent(this,BookDetailActivity.class);
+        Intent intent = new Intent(this, BookDetailActivity.class);
 
         intent.putExtra("title",book.getTitle());
         intent.putExtra("imgURL",book.getThumbnail());
         intent.putExtra("imgCover",book.getCoverPhoto());
         // lets crezte the animation
-        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(HomeActivity.this,
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(HomeActivity.this,
                 movieImageView,"sharedName");
 
         startActivity(intent,options.toBundle());
@@ -106,11 +112,11 @@ public class HomeActivity extends AppCompatActivity implements BookItemClickList
             HomeActivity.this.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    if (sliderpager.getCurrentItem()<firstSlides.size()-1) {
-                        sliderpager.setCurrentItem(sliderpager.getCurrentItem()+1);
+                    if (sliderPagerViewPager.getCurrentItem()< firstSlidesList.size()-1) {
+                        sliderPagerViewPager.setCurrentItem(sliderPagerViewPager.getCurrentItem()+1);
                     }
                     else
-                        sliderpager.setCurrentItem(0);
+                        sliderPagerViewPager.setCurrentItem(0);
                 }
             });
 

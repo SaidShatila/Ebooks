@@ -1,4 +1,4 @@
-package com.example.user.ebooks;
+package com.example.user.ebooks.base;
 
 public class Book {
     private String title;

@@ -13,7 +13,7 @@
 
     <ImageView
         android:scaleType="centerCrop"
-        android:id="@+id/item_book_img"
+        android:id="@+id/itemBookImageView"
         android:layout_width="0dp"
         android:layout_height="175dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,7 +23,7 @@
 
     <TextView
         android:textColor="#ffffff"
-        android:id="@+id/item_book_title"
+        android:id="@+id/itemBookTitleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -33,5 +33,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/item_book_img" />
+        app:layout_constraintTop_toBottomOf="@+id/itemBookImageView" />
 </android.support.constraint.ConstraintLayout>

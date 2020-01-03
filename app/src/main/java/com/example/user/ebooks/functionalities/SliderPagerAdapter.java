@@ -1,4 +1,4 @@
-package com.example.user.ebooks;
+package com.example.user.ebooks.functionalities;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+
+import com.example.user.ebooks.R;
 
 import java.util.List;
 
@@ -32,8 +34,8 @@ public class SliderPagerAdapter extends PagerAdapter {
         LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View slideLayout = inflater.inflate(R.layout.slider_item,null);
 
-        ImageView slideImg = slideLayout.findViewById(R.id.slide_img);
-        TextView slideText = slideLayout.findViewById(R.id.slide_title);
+        ImageView slideImg = slideLayout.findViewById(R.id.slideImageImageView);
+        TextView slideText = slideLayout.findViewById(R.id.slideTitleTextView);
         slideImg.setImageResource(mList.get(position).getImage());
         slideText.setText(mList.get(position).getTitle());
 
