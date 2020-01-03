@@ -8,6 +8,7 @@ public class Book {
     private String rating;
     private String BookLink;
     private int coverPhoto;
+    private boolean isPremium;
 
 
     public Book(String title, int thumbnail, int coverPhoto) {
@@ -16,18 +17,20 @@ public class Book {
         this.coverPhoto = coverPhoto;
     }
 
-    public Book(String title, int thumbnail) {
+    public Book(String title, int thumbnail,boolean isPremium) {
         this.title = title;
         this.thumbnail = thumbnail;
+        this.isPremium=isPremium;
     }
 
-    public Book(String title, String description, int thumbnail, String studio, String rating, String BookLink) {
+    public Book(String title, String description, int thumbnail, String studio, String rating, String BookLink, boolean isPremium) {
         this.title = title;
         this.description = description;
         this.thumbnail = thumbnail;
         this.studio = studio;
         this.rating = rating;
         this.BookLink = BookLink;
+        this.isPremium = isPremium;
     }
 
 
@@ -63,6 +66,9 @@ public class Book {
         return BookLink;
     }
 
+    public boolean isPremium() {
+        return isPremium;
+    }
 
     public void setTitle(String title) {
         this.title = title;
@@ -87,4 +93,9 @@ public class Book {
     public void setBookLink(String BookLink) {
         this.BookLink = BookLink;
     }
+
+    public void setPremium(boolean premium) {
+        isPremium = premium;
+    }
+
 }

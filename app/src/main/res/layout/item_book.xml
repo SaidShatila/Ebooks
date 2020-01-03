@@ -5,9 +5,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="125dp"
     android:layout_height="wrap_content"
-    android:layout_marginRight="8dp"
+    android:layout_marginEnd="12dp"
+    android:layout_marginStart="12dp"
     android:clickable="true"
     android:focusable="true"
+    android:clipChildren="false"
+    android:clipToPadding="false"
     android:foreground="?attr/selectableItemBackgroundBorderless">
 
 
@@ -34,4 +37,13 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/itemBookImageView" />
+
+    <ImageView
+        app:layout_constraintStart_toEndOf="@id/itemBookImageView"
+        app:layout_constraintEnd_toEndOf="@id/itemBookImageView"
+        app:layout_constraintTop_toTopOf="@id/itemBookImageView"
+        android:src="@drawable/ic_locked"
+        android:id="@+id/lockIndicatorImageView"
+        android:layout_width="20dp"
+        android:layout_height="20dp" />
 </android.support.constraint.ConstraintLayout>

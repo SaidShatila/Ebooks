@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.example.user.ebooks.base.Book;
 import com.example.user.ebooks.R;
+import com.example.user.ebooks.utils.SharedPreferenceHelper;
 
 import java.util.List;
 
@@ -20,18 +21,21 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.MyViewHolder> 
     Context context ;
     List<Book> mData;
     BookItemClickListener bookItemClickListener;
+    boolean isUserPremium;
 
 
-    public BookAdapter(Context context, List<Book> mData, BookItemClickListener listener) {
+    public BookAdapter(Context context, List<Book> mData, BookItemClickListener listener,boolean isUserPremium) {
         this.context = context;
         this.mData = mData;
         bookItemClickListener = listener;
+        this.isUserPremium=isUserPremium;
     }
 
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+
 
 
         View view = LayoutInflater.from(context).inflate(R.layout.item_book,viewGroup,false);
@@ -43,10 +47,26 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.MyViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
 
+        Book book= mData.get(i);
+        if(book.isPremium()){
+            myViewHolder.lockIcon.setVisibility(View.VISIBLE);
 
-        myViewHolder.BookTitle.setText(mData.get(i).getTitle());
-        myViewHolder.ImgBook.setImageResource(mData.get(i).getThumbnail());
+            if(isUserPremium){
+//book premium and user is premium ==> unlocked icon
 
+            myViewHolder.lockIcon.setImageResource(R.drawable.ic_unlock);
+            }
+            else {
+//book premium and user is NOT premium ==> locked icon
+                myViewHolder.lockIcon.setImageResource(R.drawable.ic_locked);
+            }
+        }
+        else{
+            //book is not premium ==> hide lock icon
+            myViewHolder.lockIcon.setVisibility(View.GONE);
+        }
+        myViewHolder.BookTitle.setText(book.getTitle());
+        myViewHolder.ImgBook.setImageResource(book.getThumbnail());
 
     }
 
@@ -60,14 +80,14 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.MyViewHolder> 
 
         private TextView BookTitle;
         private ImageView ImgBook;
-
+        private ImageView lockIcon;
 
         public MyViewHolder(@NonNull View itemView) {
 
             super(itemView);
             BookTitle= itemView.findViewById(R.id.itemBookTitleTextView);
             ImgBook = itemView.findViewById(R.id.itemBookImageView);
-
+            lockIcon= itemView.findViewById(R.id.lockIndicatorImageView);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

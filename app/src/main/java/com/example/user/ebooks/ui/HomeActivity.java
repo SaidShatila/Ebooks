@@ -2,12 +2,16 @@ package com.example.user.ebooks.ui;
 
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -17,6 +21,7 @@ import com.example.user.ebooks.functionalities.BookItemClickListener;
 import com.example.user.ebooks.R;
 import com.example.user.ebooks.functionalities.Slide;
 import com.example.user.ebooks.functionalities.SliderPagerAdapter;
+import com.example.user.ebooks.utils.SharedPreferenceHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,10 +35,41 @@ public class HomeActivity extends AppCompatActivity implements BookItemClickList
     private TabLayout indicatorTabLayout;
     private RecyclerView moviesRecylerView;
 
+//    @Override
+//    public boolean onPrepareOptionsMenu(Menu menu) {
+//        menu.findItem(R.id.itemSwitchToPremium).setTitle(if(){
+//
+//        }
+//        else {
+//
+//        }
+//        return super.onPrepareOptionsMenu(menu);
+//    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_home,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.itemSwitchToPremium:{
+                SharedPreferenceHelper.getCurrentInstance(this).setIsPremium(!SharedPreferenceHelper.getCurrentInstance(this).getIsPremium());
+                recreate();
+                return true;
+            }
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
 
         sliderPagerViewPager = findViewById(R.id.slider_pagerViewPager) ;
         indicatorTabLayout = findViewById(R.id.indicatorTabLayout);
@@ -62,13 +98,13 @@ public class HomeActivity extends AppCompatActivity implements BookItemClickList
         List<Book> lstBooks = new ArrayList<>();
         lstBooks.add(new Book("Someone Like Me",R.drawable.me,R.drawable.me));
         lstBooks.add(new Book("Children of Darkness",R.drawable.children,R.drawable.children));
-        lstBooks.add(new Book("Sharing NightMares",R.drawable.night));
-        lstBooks.add(new Book("Hell Divers VI Allegiance",R.drawable.hell));
-        lstBooks.add(new Book("The Martian",R.drawable.hell));
-        lstBooks.add(new Book("The Martian",R.drawable.hell));
+        lstBooks.add(new Book("Sharing NightMares",R.drawable.night,false));
+        lstBooks.add(new Book("Hell Divers VI Allegiance",R.drawable.hell,true));
+        lstBooks.add(new Book("The Martian",R.drawable.hell,true));
+        lstBooks.add(new Book("The Martian",R.drawable.hell,true));
 
 
-        BookAdapter movieAdapter = new BookAdapter(this,lstBooks,this);
+        BookAdapter movieAdapter = new BookAdapter(this,lstBooks,this,SharedPreferenceHelper.getCurrentInstance(this).getIsPremium());
         moviesRecylerView.setAdapter(movieAdapter);
         moviesRecylerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
 
@@ -91,7 +127,7 @@ public class HomeActivity extends AppCompatActivity implements BookItemClickList
         ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(HomeActivity.this,
                 movieImageView,"sharedName");
 
-        startActivity(intent,options.toBundle());
+       ActivityCompat. startActivity(this,intent,options.toBundle());
 
 
 
