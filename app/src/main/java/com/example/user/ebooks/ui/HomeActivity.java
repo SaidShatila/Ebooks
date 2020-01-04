@@ -19,7 +19,6 @@ import com.example.user.ebooks.base.Book;
 import com.example.user.ebooks.functionalities.BookAdapter;
 import com.example.user.ebooks.functionalities.BookItemClickListener;
 import com.example.user.ebooks.R;
-import com.example.user.ebooks.functionalities.Slide;
 import com.example.user.ebooks.functionalities.SliderPagerAdapter;
 import com.example.user.ebooks.utils.SharedPreferenceHelper;
 
@@ -30,21 +29,22 @@ import java.util.TimerTask;
 
 public class HomeActivity extends AppCompatActivity implements BookItemClickListener {
 
-    private List<Slide> firstSlidesList;
+    private List<Book> firstSlidesList;
     private ViewPager sliderPagerViewPager;
     private TabLayout indicatorTabLayout;
     private RecyclerView moviesRecylerView;
 
-//    @Override
-//    public boolean onPrepareOptionsMenu(Menu menu) {
-//        menu.findItem(R.id.itemSwitchToPremium).setTitle(if(){
-//
-//        }
-//        else {
-//
-//        }
-//        return super.onPrepareOptionsMenu(menu);
-//    }
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        String title;
+        if(SharedPreferenceHelper.getCurrentInstance(this).getIsPremium()){
+            title="Switch To Freemium";
+        }else{
+            title="Switch To Premium";
+        }
+        menu.findItem(R.id.itemSwitchToPremium).setTitle(title);
+        return super.onPrepareOptionsMenu(menu);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -77,13 +77,19 @@ public class HomeActivity extends AppCompatActivity implements BookItemClickList
 
         // prepare a list of slides ..
         firstSlidesList = new ArrayList<>() ;
-        firstSlidesList.add(new Slide(R.drawable.agenls,"Angels & Demons"));
-        firstSlidesList.add(new Slide(R.drawable.children,"Children Of Darkness"));
-        firstSlidesList.add(new Slide(R.drawable.hell,"Hell Divers VI Allegiance"));
-        firstSlidesList.add(new Slide(R.drawable.night,"Sharing NightMares"));
-        firstSlidesList.add(new Slide(R.drawable.me,"Someone Like ME"));
-        firstSlidesList.add(new Slide(R.drawable.science,"Putting The Science In Fiction"));
-        SliderPagerAdapter adapter = new SliderPagerAdapter(this, firstSlidesList);
+        Book book1 =new Book("Angels & Demons",R.drawable.agenls,R.drawable.agenls);
+        book1.setPremium(true);
+        firstSlidesList.add(book1);
+        Book book2= new Book("Children Of Darkness",R.drawable.children,R.drawable.children);
+        book2.setPremium(true);
+        firstSlidesList.add(book2);
+        firstSlidesList.add(new Book("Hell Divers VI Allegiance",R.drawable.hell,R.drawable.hell));
+        firstSlidesList.add(new Book("Sharing NightMares",R.drawable.night,R.drawable.night));
+        Book book5= new Book("Someone Like ME",R.drawable.me,R.drawable.me);
+        book5.setPremium(true);
+        firstSlidesList.add(book5);
+        firstSlidesList.add(new Book("Putting The Science In Fiction",R.drawable.science,R.drawable.science));
+        SliderPagerAdapter adapter = new SliderPagerAdapter(this, firstSlidesList,SharedPreferenceHelper.getCurrentInstance(this).getIsPremium());
         sliderPagerViewPager.setAdapter(adapter);
 
         sliderPagerViewPager.setAdapter(adapter);

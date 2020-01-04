@@ -57,4 +57,12 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/downImageView"
         app:layout_constraintTop_toTopOf="@+id/downImageView" />
+
+    <ImageView
+        app:layout_constraintEnd_toEndOf="@id/slideImageImageView"
+        app:layout_constraintTop_toTopOf="@id/slideImageImageView"
+        android:src="@drawable/ic_locked"
+        android:id="@+id/lockIndicatorImageView"
+        android:layout_width="20dp"
+        android:layout_height="20dp" />
 </android.support.constraint.ConstraintLayout>
