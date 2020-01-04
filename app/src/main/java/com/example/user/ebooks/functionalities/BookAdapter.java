@@ -21,10 +21,13 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.MyViewHolder> 
     Context context ;
     List<Book> mData;
     BookItemClickListener bookItemClickListener;
-    boolean isUserPremium;
+ private    boolean isUserPremium;
 
+    public void setUserPremium(boolean userPremium) {
+        isUserPremium = userPremium;
+    }
 
-    public BookAdapter(Context context, List<Book> mData, BookItemClickListener listener,boolean isUserPremium) {
+    public BookAdapter(Context context, List<Book> mData, BookItemClickListener listener, boolean isUserPremium) {
         this.context = context;
         this.mData = mData;
         bookItemClickListener = listener;
