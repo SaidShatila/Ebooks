@@ -30,6 +30,7 @@ dependencies {
     // glide library
     implementation 'com.github.bumptech.glide:glide:4.6.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
+    implementation 'com.aurelhubert:ahbottomnavigation:2.2.0'
 
 
 }
