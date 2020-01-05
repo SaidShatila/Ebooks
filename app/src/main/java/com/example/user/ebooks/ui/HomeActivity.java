@@ -139,7 +139,7 @@ public class HomeActivity extends AppCompatActivity implements BookItemClickList
                             public void onClick(DialogInterface dialog, int which) {
                                 SharedPreferenceHelper.getCurrentInstance(HomeActivity.this).setIsPremium(true);
                                 proceedToBook(book, movieImageView);
-                               refreshData();
+                                refreshData();
                             }
                         })
                         .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -156,7 +156,6 @@ public class HomeActivity extends AppCompatActivity implements BookItemClickList
             //book is not premium ==> proceed
             proceedToBook(book, movieImageView);
         }
-
 
         // i l make a simple test to see if the click works
 
@@ -199,7 +198,6 @@ public class HomeActivity extends AppCompatActivity implements BookItemClickList
                         sliderPagerViewPager.setCurrentItem(0);
                 }
             });
-
 
         }
     }

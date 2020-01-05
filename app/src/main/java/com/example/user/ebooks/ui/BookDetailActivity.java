@@ -3,16 +3,18 @@ package com.example.user.ebooks.ui;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.bumptech.glide.Glide;
 import com.example.user.ebooks.R;
 
 public class BookDetailActivity extends AppCompatActivity {
 
-    private ImageView BookThumbnailImg,BookCoverImg;
-    private TextView book_title,book_description;
+    private ImageView BookThumbnailImg, BookCoverImg;
+    private TextView book_title, book_description;
     private FloatingActionButton play_fab;
 
     @Override
@@ -21,10 +23,17 @@ public class BookDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_book_details);
         // ini views
         iniViews();
+    }
 
-
-
-
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:{
+                onBackPressed();
+                return true;
+            }
+        }
+            return super.onOptionsItemSelected(item);
     }
 
     void iniViews() {
@@ -42,14 +51,10 @@ public class BookDetailActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(bookTitle);
         book_description = findViewById(R.id.detailBookDescriptionTextView);
         // setup animation
-        BookCoverImg.setAnimation(AnimationUtils.loadAnimation(this,R.anim.scale_animation));
-        play_fab.setAnimation(AnimationUtils.loadAnimation(this,R.anim.scale_animation));
-
-
-
-
-
+        BookCoverImg.setAnimation(AnimationUtils.loadAnimation(this, R.anim.scale_animation));
+        play_fab.setAnimation(AnimationUtils.loadAnimation(this, R.anim.scale_animation));
+        //back button
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
-
-
 }
