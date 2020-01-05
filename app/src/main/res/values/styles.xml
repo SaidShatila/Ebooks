@@ -7,5 +7,10 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+        <style name="OnBoardingTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+            <item name="colorPrimary">@color/colorPrimaryOnBoard</item>
+            <item name="colorPrimaryDark">@color/colorPrimaryDarkOnboard</item>
+            <item name="colorAccent">@color/colorAccentOnBoard</item>
+        </style>
 
 </resources>

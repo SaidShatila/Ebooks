@@ -10,13 +10,21 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ui.HomeActivity">
+
+        </activity>
+        <activity android:name=".ui.BookDetailActivity"></activity>
+        <activity android:name=".ui.onboarding.OnBoardingActivity1"
+            android:theme="@style/OnBoardingTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.BookDetailActivity"></activity>
+        <activity android:name=".ui.onboarding.OnBoardingActivity2"
+            android:theme="@style/OnBoardingTheme"/>
+        <activity android:name=".ui.onboarding.OnBoardingActivity3"
+            android:theme="@style/OnBoardingTheme"/>
     </application>
 
 </manifest>

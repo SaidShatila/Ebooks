@@ -3,5 +3,12 @@
     <color name="colorPrimary">#151c25</color>
     <color name="colorPrimaryDark">#151c25</color>
     <color name="colorAccent">#f1b814</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorTransparentWhite">#cccccc</color>
     <color name="text_light_blue">#566f9a</color>
+
+
+    <color name="colorPrimaryOnBoard">#008577</color>
+    <color name="colorPrimaryDarkOnboard">#00574B</color>
+    <color name="colorAccentOnBoard">#D81B60</color>
 </resources>
