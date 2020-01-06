@@ -23,6 +23,11 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.MyViewHolder> 
     BookItemClickListener bookItemClickListener;
  private    boolean isUserPremium;
 
+    public void setmData(List<Book> mData) {
+        this.mData = mData;
+        notifyDataSetChanged();
+    }
+
     public void setUserPremium(boolean userPremium) {
         isUserPremium = userPremium;
     }

@@ -1,6 +1,15 @@
 package com.example.user.ebooks.base;
 
-public class Book {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+
+
+public class Book extends RealmObject implements Parcelable {
+    @PrimaryKey
+    private int id;
     private String title;
     private String description;
     private int thumbnail;
@@ -9,7 +18,13 @@ public class Book {
     private String BookLink;
     private int coverPhoto;
     private boolean isPremium;
+    private boolean isInProgress=false;
+    private boolean isInFavorite=false;
 
+
+    public Book(){
+
+    }
 
     public Book(String title, int thumbnail, int coverPhoto) {
         this.title = title;
@@ -33,6 +48,32 @@ public class Book {
         this.isPremium = isPremium;
     }
 
+
+    protected Book(Parcel in) {
+        id = in.readInt();
+        title = in.readString();
+        description = in.readString();
+        thumbnail = in.readInt();
+        studio = in.readString();
+        rating = in.readString();
+        BookLink = in.readString();
+        coverPhoto = in.readInt();
+        isPremium = in.readByte() != 0;
+        isInProgress = in.readByte() != 0;
+        isInFavorite = in.readByte() != 0;
+    }
+
+    public static final Creator<Book> CREATOR = new Creator<Book>() {
+        @Override
+        public Book createFromParcel(Parcel in) {
+            return new Book(in);
+        }
+
+        @Override
+        public Book[] newArray(int size) {
+            return new Book[size];
+        }
+    };
 
     public int getCoverPhoto() {
         return coverPhoto;
@@ -98,4 +139,39 @@ public class Book {
         isPremium = premium;
     }
 
+    public void setInFavorite(boolean inFavorite) {
+        isInFavorite = inFavorite;
+    }
+
+    public void setInProgress(boolean inProgress) {
+        isInProgress = inProgress;
+    }
+
+    public boolean isInFavorite() {
+        return isInFavorite;
+    }
+
+    public boolean isInProgress() {
+        return isInProgress;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(title);
+        dest.writeString(description);
+        dest.writeInt(thumbnail);
+        dest.writeString(studio);
+        dest.writeString(rating);
+        dest.writeString(BookLink);
+        dest.writeInt(coverPhoto);
+        dest.writeByte((byte) (isPremium ? 1 : 0));
+        dest.writeByte((byte) (isInProgress ? 1 : 0));
+        dest.writeByte((byte) (isInFavorite ? 1 : 0));
+    }
 }

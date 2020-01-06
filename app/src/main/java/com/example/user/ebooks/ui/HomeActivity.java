@@ -21,8 +21,43 @@ public class HomeActivity extends AppCompatActivity {
         ahBottomNavigation.addItem(new AHBottomNavigationItem("Home",R.drawable.home));
         ahBottomNavigation.addItem(new AHBottomNavigationItem("MyBooks",R.drawable.children));
 
+        ahBottomNavigation.setOnTabSelectedListener(new AHBottomNavigation.OnTabSelectedListener() {
+            @Override
+            public boolean onTabSelected(int position, boolean wasSelected) {
+                switch (position){
 
+                    case 0:{
+                        if(!wasSelected) {
+                            openHomeFragment();
+                        }
+                    }
+                    break;
+                    case 1:{
+                        if(!wasSelected) {
+                            openMyBooksFragment();
+                        }
+                    }
+                    break;
 
+                }
+
+                return true;
+            }
+        });
+            ahBottomNavigation.setCurrentItem(0,false);
+            openHomeFragment();
+    }
+
+    private void openMyBooksFragment() {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.frameLayoutRoot,new MyBooksFragment(),MyBooksFragment.class.getSimpleName())
+        .commitNow();
+    }
+
+    private void openHomeFragment() {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.frameLayoutRoot,new HomeFragment(),HomeFragment.class.getSimpleName())
+        .commitNow();
     }
 }
 

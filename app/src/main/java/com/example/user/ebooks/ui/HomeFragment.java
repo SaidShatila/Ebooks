@@ -43,6 +43,12 @@ public class HomeFragment extends Fragment implements BookItemClickListener {
     private BookAdapter movieAdapter;
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
     public void onPrepareOptionsMenu(Menu menu) {
         String title;
         if (SharedPreferenceHelper.getCurrentInstance(getContext()).getIsPremium()) {
@@ -87,6 +93,7 @@ public class HomeFragment extends Fragment implements BookItemClickListener {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        setUpViews(view);
     }
 
     public void setUpViews(View root){
@@ -185,20 +192,20 @@ public class HomeFragment extends Fragment implements BookItemClickListener {
 
         @Override
         public void run() {
+            if (getActivity() != null) {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (sliderPagerViewPager.getCurrentItem() < firstSlidesList.size() - 1) {
+                            sliderPagerViewPager.setCurrentItem(sliderPagerViewPager.getCurrentItem() + 1);
+                        } else
+                            sliderPagerViewPager.setCurrentItem(0);
+                    }
+                });
 
-            getActivity().runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    if (sliderPagerViewPager.getCurrentItem() < firstSlidesList.size() - 1) {
-                        sliderPagerViewPager.setCurrentItem(sliderPagerViewPager.getCurrentItem() + 1);
-                    } else
-                        sliderPagerViewPager.setCurrentItem(0);
-                }
-            });
-
+            }
         }
     }
-
 
 
     private void refreshData() {
@@ -212,6 +219,7 @@ public class HomeFragment extends Fragment implements BookItemClickListener {
         intent.putExtra("title", book.getTitle());
         intent.putExtra("imgURL", book.getThumbnail());
         intent.putExtra("imgCover", book.getCoverPhoto());
+        intent.putExtra("book",book);
         // lets crezte the animation
         ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(),
                 movieImageView, "sharedName");

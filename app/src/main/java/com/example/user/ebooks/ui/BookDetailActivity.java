@@ -1,21 +1,29 @@
 package com.example.user.ebooks.ui;
 
+import android.support.design.button.MaterialButton;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.user.ebooks.R;
+import com.example.user.ebooks.base.Book;
+import com.example.user.ebooks.db.RealmHelper;
+
+import io.realm.Realm;
 
 public class BookDetailActivity extends AppCompatActivity {
 
     private ImageView BookThumbnailImg, BookCoverImg;
     private TextView book_title, book_description;
     private FloatingActionButton play_fab;
+    private MaterialButton buttonFavorite;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +49,7 @@ public class BookDetailActivity extends AppCompatActivity {
         String bookTitle = getIntent().getExtras().getString("title");
         int imageResourceId = getIntent().getExtras().getInt("imgURL");
         int imagecover = getIntent().getExtras().getInt("imgCover");
+        final Book book = getIntent().getParcelableExtra("book");
         BookThumbnailImg = findViewById(R.id.detailBookImageView);
         Glide.with(this).load(imageResourceId).into(BookThumbnailImg);
         BookThumbnailImg.setImageResource(imageResourceId);
@@ -56,5 +65,23 @@ public class BookDetailActivity extends AppCompatActivity {
         //back button
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        buttonFavorite = findViewById(R.id.buttonAddToFavorite);
+        buttonFavorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                book.setInFavorite(!book.isInFavorite());
+                RealmHelper.insertBook(Realm.getDefaultInstance(),book);
+                refreshFavoriteIcon(book);
+            }
+        });
+        refreshFavoriteIcon(book);
+    }
+    private void refreshFavoriteIcon(Book book) {
+        if (book.isInFavorite()) {
+            buttonFavorite.setIconResource(R.drawable.ic_favorite);
+        } else {
+            buttonFavorite.setIconResource(R.drawable.ic_unfavorite);
+        }
     }
 }

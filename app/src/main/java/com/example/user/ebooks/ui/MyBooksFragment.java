@@ -11,7 +11,15 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.user.ebooks.R;
+import com.example.user.ebooks.base.Book;
+import com.example.user.ebooks.db.RealmHelper;
+import com.example.user.ebooks.functionalities.BookAdapter;
 import com.example.user.ebooks.functionalities.SliderPagerAdapter;
+import com.example.user.ebooks.utils.SharedPreferenceHelper;
+
+import java.util.ArrayList;
+
+import io.realm.Realm;
 
 public class MyBooksFragment extends Fragment {
 
@@ -19,8 +27,8 @@ public class MyBooksFragment extends Fragment {
     private View textviewInProgress;
     private RecyclerView recyclerViewInProgress;
     private RecyclerView recyclerViewFavorites;
-    SliderPagerAdapter sliderPagerAdapterInProgress;
-    SliderPagerAdapter sliderPagerAdapterFavorites;
+    BookAdapter bookAdapterInProgress;
+    BookAdapter bookAdapterFavorites;
 
     @Nullable
     @Override
@@ -41,8 +49,15 @@ public class MyBooksFragment extends Fragment {
         recyclerViewFavorites   = root.findViewById(R.id.favoriteBookRecylerView);
         recyclerViewFavorites.setLayoutManager(new LinearLayoutManager(getContext()));
 
-//        sliderPagerAdapterFavorites = new SliderPagerAdapter();
-//        sliderPagerAdapterInProgress= new SliderPagerAdapter();
+        bookAdapterFavorites = new BookAdapter(getContext(), new ArrayList<Book>(),null, SharedPreferenceHelper.getCurrentInstance(getContext()).getIsPremium());
+        bookAdapterInProgress = new BookAdapter(getContext(), new ArrayList<Book>(), null,SharedPreferenceHelper.getCurrentInstance(getContext()).getIsPremium());
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        bookAdapterFavorites.setmData(RealmHelper.fetchInFavoriteBooks(Realm.getDefaultInstance()));
+        bookAdapterInProgress.setmData(RealmHelper.fetchInProgressBooks(Realm.getDefaultInstance()));
     }
 }
