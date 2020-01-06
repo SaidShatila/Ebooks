@@ -22,6 +22,8 @@ public class OnBoardingActivity2 extends AppCompatActivity {
     private Button button;
     private int currPage;
     private TextView finish;
+    private View skipButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,10 +33,19 @@ public class OnBoardingActivity2 extends AppCompatActivity {
         dots = (LinearLayout)findViewById(R.id.dots);
         NextBtn = (Button)findViewById(R.id.nxtbtn);
         BackBtn=(Button)findViewById(R.id.bckbtn);
+        skipButton = (Button)findViewById(R.id.skipButton);
         slideAdapter = new SlideAdapter(this);
         slideviewerPage.setAdapter(slideAdapter);
         addDotsIndicator(0);
         slideviewerPage.addOnPageChangeListener(viewListener);
+        skipButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                slideviewerPage.setCurrentItem(currPage);
+                openRegister();
+            }
+        });
+
         NextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,6 +101,8 @@ else {
                 BackBtn.setVisibility(View.INVISIBLE);
                 NextBtn.setText("Next");
                 BackBtn.setText("");
+                skipButton.setVisibility(View.VISIBLE);
+                skipButton.setEnabled(true);
             }
             else if(position ==adots.length-1){
                 NextBtn.setEnabled(true);
@@ -97,7 +110,7 @@ else {
                 BackBtn.setVisibility(View.VISIBLE);
                 NextBtn.setText("Finish");
                 BackBtn.setText("Back");
-
+                skipButton.setVisibility(View.INVISIBLE);
 
             }
             else {
@@ -106,6 +119,7 @@ else {
                 BackBtn.setVisibility(View.VISIBLE);
                 NextBtn.setText("Next");
                 BackBtn.setText("Back");
+                skipButton.setVisibility(View.VISIBLE);
             }
         }
 

@@ -11,7 +11,17 @@
         android:id="@+id/slideviewerPage"
         android:layout_width="match_parent"
         android:layout_height="653dp"/>
-
+        <Button
+            android:id="@+id/skipButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:background="@android:color/transparent"
+            android:text="Skip"
+            android:textColor="@color/colorWhite"
+            android:visibility="visible" />
     <Button
         android:id="@+id/bckbtn"
         android:layout_width="wrap_content"
@@ -50,6 +60,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="157dp"
         android:layout_marginRight="157dp"
+        android:layout_marginStart="157dp"
         android:layout_marginBottom="3dp"
         android:gravity="bottom|center"
         android:orientation="horizontal">

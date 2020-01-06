@@ -21,7 +21,7 @@ public class OnBoardingActivity1 extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    sleep(8000);
+                    sleep(3000);
                     Intent intent = new Intent(getApplicationContext(),OnBoardingActivity2.class);
                     startActivity(intent);
                     finish();
