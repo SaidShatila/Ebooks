@@ -21,6 +21,11 @@ public class RealmHelper {
             }
         });
     }
+    public static Book getBookById(Realm realm,int id){
+        Book realmBook = realm.where(Book.class).equalTo("id",id).findFirst();
+        if(realmBook==null)return null;
+        return realm.copyFromRealm(realmBook);
+    }
     public static List<Book> fetchInProgressBooks (Realm realm){
         return realm.where(Book.class).equalTo("isInProgress",true).findAll();
 

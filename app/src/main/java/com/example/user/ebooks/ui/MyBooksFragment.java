@@ -52,6 +52,9 @@ public class MyBooksFragment extends Fragment {
         bookAdapterFavorites = new BookAdapter(getContext(), new ArrayList<Book>(),null, SharedPreferenceHelper.getCurrentInstance(getContext()).getIsPremium());
         bookAdapterInProgress = new BookAdapter(getContext(), new ArrayList<Book>(), null,SharedPreferenceHelper.getCurrentInstance(getContext()).getIsPremium());
 
+
+        recyclerViewFavorites.setAdapter(bookAdapterFavorites);
+        recyclerViewInProgress.setAdapter(bookAdapterInProgress);
     }
 
     @Override

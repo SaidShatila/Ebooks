@@ -26,16 +26,18 @@ public class Book extends RealmObject implements Parcelable {
 
     }
 
-    public Book(String title, int thumbnail, int coverPhoto) {
+    public Book(String title, int thumbnail, int coverPhoto,int id) {
         this.title = title;
         this.thumbnail = thumbnail;
         this.coverPhoto = coverPhoto;
+        this.id=id;
     }
 
-    public Book(String title, int thumbnail,boolean isPremium) {
+    public Book(String title, int thumbnail,boolean isPremium,int id) {
         this.title = title;
         this.thumbnail = thumbnail;
         this.isPremium=isPremium;
+        this.id=id;
     }
 
     public Book(String title, String description, int thumbnail, String studio, String rating, String BookLink, boolean isPremium) {
@@ -158,6 +160,14 @@ public class Book extends RealmObject implements Parcelable {
     @Override
     public int describeContents() {
         return 0;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+            this.id = id;
     }
 
     @Override

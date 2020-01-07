@@ -1,5 +1,7 @@
 package com.example.user.ebooks.ui;
 
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.support.design.button.MaterialButton;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -23,6 +25,7 @@ public class BookDetailActivity extends AppCompatActivity {
     private TextView book_title, book_description;
     private FloatingActionButton play_fab;
     private MaterialButton buttonFavorite;
+    private FloatingActionButton playFloatingButton;
 
 
     @Override
@@ -49,7 +52,18 @@ public class BookDetailActivity extends AppCompatActivity {
         String bookTitle = getIntent().getExtras().getString("title");
         int imageResourceId = getIntent().getExtras().getInt("imgURL");
         int imagecover = getIntent().getExtras().getInt("imgCover");
-        final Book book = getIntent().getParcelableExtra("book");
+        Book parcelableBook = getIntent().getParcelableExtra("book");
+        Book realmBook=  RealmHelper.getBookById(Realm.getDefaultInstance(),parcelableBook.getId());
+        final Book book=realmBook!=null? realmBook : parcelableBook;
+        playFloatingButton = findViewById(R.id.playFloatingActionButton);
+        playFloatingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                book.setInProgress(!book.isInProgress());
+                RealmHelper.insertBook(Realm.getDefaultInstance(),book);
+                refreshInProgressButton(book);
+            }
+        });
         BookThumbnailImg = findViewById(R.id.detailBookImageView);
         Glide.with(this).load(imageResourceId).into(BookThumbnailImg);
         BookThumbnailImg.setImageResource(imageResourceId);
@@ -76,12 +90,25 @@ public class BookDetailActivity extends AppCompatActivity {
             }
         });
         refreshFavoriteIcon(book);
+        refreshInProgressButton(book);
     }
+
+    private void refreshInProgressButton(Book book) {
+        if(book.isInProgress()){
+            playFloatingButton.setImageResource(R.drawable.ic_check_circle);
+        }
+        else {
+            playFloatingButton.setImageResource(R.drawable.ic_play_arrow_black_24dp);
+        }
+    }
+
     private void refreshFavoriteIcon(Book book) {
         if (book.isInFavorite()) {
             buttonFavorite.setIconResource(R.drawable.ic_favorite);
+            buttonFavorite.setIconTint(ColorStateList.valueOf(Color.RED));
         } else {
             buttonFavorite.setIconResource(R.drawable.ic_unfavorite);
+            buttonFavorite.setIconTint(ColorStateList.valueOf(Color.WHITE));
         }
     }
 }

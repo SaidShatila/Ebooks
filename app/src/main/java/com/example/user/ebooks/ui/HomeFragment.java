@@ -105,18 +105,18 @@ public class HomeFragment extends Fragment implements BookItemClickListener {
 
         // prepare a list of slides ..
         firstSlidesList = new ArrayList<>();
-        Book book1 = new Book("Angels & Demons", R.drawable.agenls, R.drawable.agenls);
+        Book book1 = new Book("Angels & Demons", R.drawable.agenls, R.drawable.agenls,1);
         book1.setPremium(true);
         firstSlidesList.add(book1);
-        Book book2 = new Book("Children Of Darkness", R.drawable.children, R.drawable.children);
+        Book book2 = new Book("Children Of Darkness", R.drawable.children, R.drawable.children,2);
         book2.setPremium(true);
         firstSlidesList.add(book2);
-        firstSlidesList.add(new Book("Hell Divers VI Allegiance", R.drawable.hell, R.drawable.hell));
-        firstSlidesList.add(new Book("Sharing NightMares", R.drawable.night, R.drawable.night));
-        Book book5 = new Book("Someone Like ME", R.drawable.me, R.drawable.me);
+        firstSlidesList.add(new Book("Hell Divers VI Allegiance", R.drawable.hell, R.drawable.hell,3));
+        firstSlidesList.add(new Book("Sharing NightMares", R.drawable.night, R.drawable.night,4));
+        Book book5 = new Book("Someone Like ME", R.drawable.me, R.drawable.me,5);
         book5.setPremium(true);
         firstSlidesList.add(book5);
-        firstSlidesList.add(new Book("Putting The Science In Fiction", R.drawable.science, R.drawable.science));
+        firstSlidesList.add(new Book("Putting The Science In Fiction", R.drawable.science, R.drawable.science,6));
         SliderPagerAdapter adapter = new SliderPagerAdapter(getContext(), firstSlidesList, SharedPreferenceHelper.getCurrentInstance(getContext()).getIsPremium());
         sliderPagerViewPager.setAdapter(adapter);
 
@@ -130,12 +130,12 @@ public class HomeFragment extends Fragment implements BookItemClickListener {
         // ini data
 
         List<Book> lstBooks = new ArrayList<>();
-        lstBooks.add(new Book("Someone Like Me", R.drawable.me, R.drawable.me));
-        lstBooks.add(new Book("Children of Darkness", R.drawable.children, R.drawable.children));
-        lstBooks.add(new Book("Sharing NightMares", R.drawable.night, false));
-        lstBooks.add(new Book("Hell Divers VI Allegiance", R.drawable.hell, true));
-        lstBooks.add(new Book("The Martian", R.drawable.hell, true));
-        lstBooks.add(new Book("The Martian", R.drawable.hell, true));
+        lstBooks.add(new Book("Someone Like Me", R.drawable.me, R.drawable.me,7));
+        lstBooks.add(new Book("Children of Darkness", R.drawable.children, R.drawable.children,8));
+        lstBooks.add(new Book("Sharing NightMares", R.drawable.night, false,9));
+        lstBooks.add(new Book("Hell Divers VI Allegiance", R.drawable.hell, true,10));
+        lstBooks.add(new Book("The Martian", R.drawable.hell, true,11));
+        lstBooks.add(new Book("The Martian", R.drawable.hell, true,12));
 
 
         movieAdapter = new BookAdapter(getContext(), lstBooks, this, SharedPreferenceHelper.getCurrentInstance(getContext()).getIsPremium());
