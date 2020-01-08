@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.HomeActivity"
+    tools:context="com.example.user.ebooks.ui.HomeActivity"
+    android:background="@color/colorPrimary">
+
+<android.support.constraint.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@color/colorPrimary">
 
 
@@ -31,6 +36,7 @@
     </android.support.design.widget.TabLayout>
 
 
+
     <TextView
         android:textColor="@color/text_light_blue"
         android:id="@+id/textView"
@@ -48,7 +54,7 @@
         app:layout_constraintTop_toBottomOf="@+id/indicatorTabLayout" />
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/booksRecylerView"
+        android:id="@+id/popularBooksRecylerView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -64,4 +70,42 @@
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
 
+    <TextView
+        android:id="@+id/txt_last_week_books"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="Top Rated"
+        android:textAllCaps="true"
+        android:textColor="@color/text_light_blue"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/popularBooksRecylerView"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/Rv_books_last_week"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_last_week_books" />
+
+
+
 </android.support.constraint.ConstraintLayout>
+
+</android.support.v4.widget.NestedScrollView>

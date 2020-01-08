@@ -17,21 +17,6 @@
         app:layout_constraintTop_toTopOf="parent"
         android:src="@drawable/ic_launcher_background" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/playFloatingActionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:clickable="true"
-        app:layout_constraintBottom_toBottomOf="@+id/slideImageImageView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/slideImageImageView"
-        app:layout_constraintTop_toTopOf="@+id/slideImageImageView"
-        android:src="@drawable/ic_play_arrow_black_24dp" />
-
     <ImageView
         android:id="@+id/downImageView"
         android:layout_width="0dp"

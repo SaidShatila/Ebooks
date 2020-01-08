@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import com.example.user.ebooks.R;
 import com.example.user.ebooks.base.Book;
+import com.example.user.ebooks.db.DataSource;
 import com.example.user.ebooks.functionalities.BookAdapter;
 import com.example.user.ebooks.functionalities.BookItemClickListener;
 import com.example.user.ebooks.functionalities.SliderPagerAdapter;
@@ -40,12 +41,16 @@ public class HomeFragment extends Fragment implements BookItemClickListener {
     private TabLayout indicatorTabLayout;
     private RecyclerView moviesRecylerView;
     private List<Book> firstSlidesList;
-    private BookAdapter movieAdapter;
+    private BookAdapter bookAdapter;
+    private RecyclerView BooksRV,BooksRvLastWeek;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+
+
     }
 
     @Override
@@ -94,29 +99,34 @@ public class HomeFragment extends Fragment implements BookItemClickListener {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setUpViews(view);
+
+//        iniViews();
+//        iniSlider();
+//        iniPopularBooks();
+//        iniLastWeekBooks();
+
     }
 
     public void setUpViews(View root){
 
+
+        BooksRV = root.findViewById(R.id.popularBooksRecylerView);
+        BooksRvLastWeek = root.findViewById(R.id.Rv_books_last_week);
+
         sliderPagerViewPager = root.findViewById(R.id.slider_pagerViewPager);
         indicatorTabLayout = root.findViewById(R.id.indicatorTabLayout);
-        moviesRecylerView = root.findViewById(R.id.booksRecylerView);
+
 
 
         // prepare a list of slides ..
         firstSlidesList = new ArrayList<>();
-        Book book1 = new Book("Angels & Demons", R.drawable.agenls, R.drawable.agenls,1);
-        book1.setPremium(true);
+        Book book1 = new Book("Dracula",R.drawable.dracula,R.drawable.dracula,13);
         firstSlidesList.add(book1);
-        Book book2 = new Book("Children Of Darkness", R.drawable.children, R.drawable.children,2);
-        book2.setPremium(true);
+        Book book2 = new Book("The Tree",R.drawable.tree,R.drawable.tree,14);
         firstSlidesList.add(book2);
-        firstSlidesList.add(new Book("Hell Divers VI Allegiance", R.drawable.hell, R.drawable.hell,3));
-        firstSlidesList.add(new Book("Sharing NightMares", R.drawable.night, R.drawable.night,4));
-        Book book5 = new Book("Someone Like ME", R.drawable.me, R.drawable.me,5);
-        book5.setPremium(true);
+        firstSlidesList.add(new Book("Peter Pan",R.drawable.peterpan,R.drawable.peterpan,15));
+        Book book5 = new Book("Poetry Of Art",R.drawable.poetryofart,R.drawable.poetryofart,17);
         firstSlidesList.add(book5);
-        firstSlidesList.add(new Book("Putting The Science In Fiction", R.drawable.science, R.drawable.science,6));
         SliderPagerAdapter adapter = new SliderPagerAdapter(getContext(), firstSlidesList, SharedPreferenceHelper.getCurrentInstance(getContext()).getIsPremium());
         sliderPagerViewPager.setAdapter(adapter);
 
@@ -129,19 +139,14 @@ public class HomeFragment extends Fragment implements BookItemClickListener {
         // Recyclerview Setup
         // ini data
 
-        List<Book> lstBooks = new ArrayList<>();
-        lstBooks.add(new Book("Someone Like Me", R.drawable.me, R.drawable.me,7));
-        lstBooks.add(new Book("Children of Darkness", R.drawable.children, R.drawable.children,8));
-        lstBooks.add(new Book("Sharing NightMares", R.drawable.night, false,9));
-        lstBooks.add(new Book("Hell Divers VI Allegiance", R.drawable.hell, true,10));
-        lstBooks.add(new Book("The Martian", R.drawable.hell, true,11));
-        lstBooks.add(new Book("The Martian", R.drawable.hell, true,12));
 
+        BookAdapter LastWeekBookAdapter = new BookAdapter(getContext(), DataSource.getLastWeekBook(),this,SharedPreferenceHelper.getCurrentInstance(getContext()).getIsPremium());
+        BooksRvLastWeek.setAdapter(LastWeekBookAdapter);
+        BooksRvLastWeek.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
 
-        movieAdapter = new BookAdapter(getContext(), lstBooks, this, SharedPreferenceHelper.getCurrentInstance(getContext()).getIsPremium());
-        moviesRecylerView.setAdapter(movieAdapter);
-        moviesRecylerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-
+        BookAdapter movieAdapter = new BookAdapter(getContext(), DataSource.getPopularBooks(),this,SharedPreferenceHelper.getCurrentInstance(getContext()).getIsPremium());
+        BooksRV.setAdapter(movieAdapter);
+        BooksRV.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
 
     }
 
@@ -209,8 +214,8 @@ public class HomeFragment extends Fragment implements BookItemClickListener {
 
 
     private void refreshData() {
-        movieAdapter.setUserPremium(SharedPreferenceHelper.getCurrentInstance(getContext()).getIsPremium());
-        movieAdapter.notifyDataSetChanged();
+        bookAdapter.setUserPremium(SharedPreferenceHelper.getCurrentInstance(getContext()).getIsPremium());
+        bookAdapter.notifyDataSetChanged();
     }
 
     private void proceedToBook(Book book, ImageView movieImageView) {

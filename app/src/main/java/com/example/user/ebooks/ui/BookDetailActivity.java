@@ -50,6 +50,7 @@ public class BookDetailActivity extends AppCompatActivity {
     void iniViews() {
         play_fab = findViewById(R.id.playFloatingActionButton);
         String bookTitle = getIntent().getExtras().getString("title");
+        String summarize = getIntent().getExtras().getString("description");
         int imageResourceId = getIntent().getExtras().getInt("imgURL");
         int imagecover = getIntent().getExtras().getInt("imgCover");
         Book parcelableBook = getIntent().getParcelableExtra("book");
@@ -72,7 +73,8 @@ public class BookDetailActivity extends AppCompatActivity {
         book_title = findViewById(R.id.detailBookTitleTextView);
         book_title.setText(bookTitle);
         getSupportActionBar().setTitle(bookTitle);
-        book_description = findViewById(R.id.detailBookDescriptionTextView);
+        book_description = findViewById(R.id.summary);
+        book_description.setText(book.getDescription());
         // setup animation
         BookCoverImg.setAnimation(AnimationUtils.loadAnimation(this, R.anim.scale_animation));
         play_fab.setAnimation(AnimationUtils.loadAnimation(this, R.anim.scale_animation));

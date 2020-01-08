@@ -33,6 +33,23 @@
             app:layout_constraintTop_toTopOf="@+id/detailBookCoverImageView" />
 
         <android.support.design.widget.FloatingActionButton
+            android:id="@+id/play_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginBottom="8dp"
+            android:clickable="true"
+            android:src="@drawable/ic_library_books_black_24dp"
+            app:layout_constraintBottom_toBottomOf="@+id/backgroundImageView"
+            app:layout_constraintEnd_toEndOf="@+id/backgroundImageView"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="@+id/backgroundImageView"
+            app:layout_constraintTop_toTopOf="@+id/backgroundImageView"
+            app:layout_constraintVertical_bias="0.507" />
+
+
+        <android.support.design.widget.FloatingActionButton
 
             android:id="@+id/playFloatingActionButton"
             android:layout_width="wrap_content"
@@ -42,7 +59,7 @@
             app:rippleColor="@color/colorTransparentWhite"
             app:layout_constraintBottom_toBottomOf="@+id/detailBookTitleTextView"
             app:layout_constraintEnd_toEndOf="@+id/detailBookTitleTextView"
-            app:layout_constraintTop_toTopOf="@+id/detailBookDescriptionTextView" />
+            app:layout_constraintTop_toTopOf="@+id/summary" />
 
         <ImageView
             android:transitionName="sharedName"
@@ -74,19 +91,19 @@
             app:layout_constraintTop_toBottomOf="@+id/detailBookCoverImageView" />
 
         <TextView
-            android:lineSpacingExtra="8dp"
-            android:textColor="@color/text_light_blue"
-            android:id="@+id/detailBookDescriptionTextView"
+            android:id="@+id/summary"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
+            android:layout_height="336dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:lineSpacingExtra="8dp"
+            android:text="Text View"
+            android:textColor="@android:color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:text="@string/simple_text"
             app:layout_constraintTop_toBottomOf="@+id/detailBookImageView" />
 
         <android.support.design.button.MaterialButton

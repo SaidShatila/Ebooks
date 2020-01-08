@@ -31,6 +31,16 @@ public class Book extends RealmObject implements Parcelable {
         this.thumbnail = thumbnail;
         this.coverPhoto = coverPhoto;
         this.id=id;
+
+    }
+
+    public Book(String title, int thumbnail, int coverPhoto,int id,String description) {
+        this.title = title;
+        this.thumbnail = thumbnail;
+        this.coverPhoto = coverPhoto;
+        this.description=description;
+        this.id=id;
+
     }
 
     public Book(String title, int thumbnail,boolean isPremium,int id) {
