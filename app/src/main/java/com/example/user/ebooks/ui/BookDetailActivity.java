@@ -95,10 +95,10 @@ public class BookDetailActivity extends AppCompatActivity {
 
     private void refreshInProgressButton(Book book) {
         if(book.isInProgress()){
-            playFloatingButton.setImageResource(R.drawable.ic_check_circle);
+            playFloatingButton.setImageResource(R.drawable.ic_bookmark_black_24dp);
         }
         else {
-            playFloatingButton.setImageResource(R.drawable.ic_play_arrow_black_24dp);
+            playFloatingButton.setImageResource(R.drawable.ic_bookmark_border_black_24dp);
         }
     }
 

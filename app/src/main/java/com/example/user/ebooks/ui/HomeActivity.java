@@ -18,8 +18,8 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.acitivty_home);
         ahBottomNavigation = findViewById(R.id.bottom_navigation);
 
-        ahBottomNavigation.addItem(new AHBottomNavigationItem("Home",R.drawable.home));
-        ahBottomNavigation.addItem(new AHBottomNavigationItem("MyBooks",R.drawable.children));
+        ahBottomNavigation.addItem(new AHBottomNavigationItem("Home",R.drawable.ic_home_black_24dp));
+        ahBottomNavigation.addItem(new AHBottomNavigationItem("MyBooks",R.drawable.ic_book_black_24dp));
 
         ahBottomNavigation.setOnTabSelectedListener(new AHBottomNavigation.OnTabSelectedListener() {
             @Override

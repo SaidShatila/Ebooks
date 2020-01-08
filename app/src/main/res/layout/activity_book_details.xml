@@ -33,15 +33,16 @@
             app:layout_constraintTop_toTopOf="@+id/detailBookCoverImageView" />
 
         <android.support.design.widget.FloatingActionButton
+
             android:id="@+id/playFloatingActionButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="true"
-            android:src="@drawable/ic_play_arrow_black_24dp"
-            app:layout_constraintBottom_toBottomOf="@+id/backgroundImageView"
-            app:layout_constraintEnd_toEndOf="@+id/backgroundImageView"
-            app:layout_constraintStart_toStartOf="@+id/backgroundImageView"
-            app:layout_constraintTop_toTopOf="@+id/backgroundImageView" />
+            android:background="@color/colorTransparentWhite"
+            app:rippleColor="@color/colorTransparentWhite"
+            app:layout_constraintBottom_toBottomOf="@+id/detailBookTitleTextView"
+            app:layout_constraintEnd_toEndOf="@+id/detailBookTitleTextView"
+            app:layout_constraintTop_toTopOf="@+id/detailBookDescriptionTextView" />
 
         <ImageView
             android:transitionName="sharedName"
@@ -97,6 +98,7 @@
             android:paddingBottom="4dp"
             android:paddingLeft="4dp"
             android:layout_height="30dp"
+            app:rippleColor="@color/colorTransparentWhite"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="16dp"
