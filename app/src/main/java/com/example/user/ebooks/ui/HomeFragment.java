@@ -39,10 +39,10 @@ public class HomeFragment extends Fragment implements BookItemClickListener {
 
     private ViewPager sliderPagerViewPager;
     private TabLayout indicatorTabLayout;
-    private RecyclerView moviesRecylerView;
     private List<Book> firstSlidesList;
-    private BookAdapter bookAdapter;
     private RecyclerView BooksRV,BooksRvLastWeek;
+    private BookAdapter lastWeekBookAdapter;
+    private BookAdapter movieAdapter;
 
 
     @Override
@@ -140,11 +140,11 @@ public class HomeFragment extends Fragment implements BookItemClickListener {
         // ini data
 
 
-        BookAdapter LastWeekBookAdapter = new BookAdapter(getContext(), DataSource.getLastWeekBook(),this,SharedPreferenceHelper.getCurrentInstance(getContext()).getIsPremium());
-        BooksRvLastWeek.setAdapter(LastWeekBookAdapter);
+        lastWeekBookAdapter = new BookAdapter(getContext(), DataSource.getLastWeekBook(),this,SharedPreferenceHelper.getCurrentInstance(getContext()).getIsPremium());
+        BooksRvLastWeek.setAdapter(lastWeekBookAdapter);
         BooksRvLastWeek.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
 
-        BookAdapter movieAdapter = new BookAdapter(getContext(), DataSource.getPopularBooks(),this,SharedPreferenceHelper.getCurrentInstance(getContext()).getIsPremium());
+        movieAdapter = new BookAdapter(getContext(), DataSource.getPopularBooks(),this,SharedPreferenceHelper.getCurrentInstance(getContext()).getIsPremium());
         BooksRV.setAdapter(movieAdapter);
         BooksRV.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
 
@@ -214,8 +214,12 @@ public class HomeFragment extends Fragment implements BookItemClickListener {
 
 
     private void refreshData() {
-        bookAdapter.setUserPremium(SharedPreferenceHelper.getCurrentInstance(getContext()).getIsPremium());
-        bookAdapter.notifyDataSetChanged();
+        lastWeekBookAdapter.setUserPremium(SharedPreferenceHelper.getCurrentInstance(getContext()).getIsPremium());
+        lastWeekBookAdapter.notifyDataSetChanged();
+        movieAdapter.setUserPremium(SharedPreferenceHelper.getCurrentInstance(getContext()).getIsPremium());
+        movieAdapter.notifyDataSetChanged();
+
+
     }
 
     private void proceedToBook(Book book, ImageView movieImageView) {
